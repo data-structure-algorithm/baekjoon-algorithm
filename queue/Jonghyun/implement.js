@@ -75,17 +75,39 @@ class Queue {
   }
 }
 
-const queue = new Queue(5);
-queue.enqueue("apple");
-queue.enqueue("banana");
-queue.enqueue("orange");
-queue.enqueue("chicken");
+// const queue = new Queue(5);
+// queue.enqueue("apple");
+// queue.enqueue("banana");
+// queue.enqueue("orange");
+// queue.enqueue("chicken");
 
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.peek());
-console.log(queue.front);
-console.log(queue.rear);
-console.log(queue.peek());
-console.log(queue.dequeue());
+// console.log(queue.dequeue());
+// console.log(queue.dequeue());
+// console.log(queue.dequeue());
+// console.log(queue.peek());
+// console.log(queue.front);
+// console.log(queue.rear);
+// console.log(queue.peek());
+// console.log(queue.dequeue());
+
+// class Queue {
+//   constructor() {
+//     this.array = [];
+//     this.front = 0;
+//     this.rear = 0;
+//   }
+
+//   enqueue(value) {
+//     this.array.push(value);
+//     this.rear++;
+//   }
+
+//   dequeue() {
+//     this.front++;
+//     return this.array.shift();
+//   }
+
+//   peek() {
+//     return this.array[0];
+//   }
+// }
