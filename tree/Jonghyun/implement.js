@@ -43,6 +43,19 @@ class BinarySearchTree {
   // 해당 키가 있는지 없는지 반환 => boolean
   search(key) {
     //
+    function searchNode(node, key) {
+      if (node === null) return false;
+
+      if (node.key === key) {
+        return true;
+      } else if (key < node.key) {
+        searchNode(node.left, key);
+      } else {
+        searchNode(node.right, key);
+      }
+    }
+
+    searchNode(this.root, key);
   }
 
   // tree의 최솟값
@@ -62,14 +75,11 @@ class BinarySearchTree {
 }
 
 const binarySearchTree = new BinarySearchTree();
-console.log(binarySearchTree.root);
 binarySearchTree.insert(4);
-console.log(binarySearchTree.root);
 binarySearchTree.insert(5);
-console.log(binarySearchTree.root);
 binarySearchTree.insert(3);
-console.log(binarySearchTree.root);
 binarySearchTree.insert(1);
-console.log(binarySearchTree.root);
 binarySearchTree.insert(2);
-console.log(binarySearchTree.root);
+binarySearchTree.insert(10);
+
+binarySearchTree.search(10);
