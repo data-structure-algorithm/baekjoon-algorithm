@@ -41,11 +41,12 @@ class BinarySearchTree {
 
   // 해당 키가 있는지 없는지 반환 => boolean
   search(key) {
+    let result;
     function searchNode(node, key) {
-      if (node === null) return false;
+      if (node === null) return (result = false);
 
       if (node.key === key) {
-        return true;
+        return (result = node);
       } else if (key < node.key) {
         searchNode(node.left, key);
       } else {
@@ -54,6 +55,7 @@ class BinarySearchTree {
     }
 
     searchNode(this.root, key);
+    return result;
   }
 
   // tree의 최솟값
@@ -97,21 +99,57 @@ class BinarySearchTree {
   }
 
   // 해당 키를 삭제
-  remove() {
-    //
+  remove(key) {
+    // 1. 만약에 해당 키가 없다면 에러를 반환하고
+    // 2. 해당 키가 있는데 자식이 아무 것도 없으면 그냥 없애고 끝
+    // 2-1. 만약에 자식이 한 개만 있으면 자식을 지금 노드로 바꿔
+    // 2-2. 근데 제일 중요한 것이 자식이 둘일 때임
+    // 둘일 때는 우측의 왼쪽에 왼쪽에 왼쪽에 ... 왼쪽에 있는 것이 와야 됨
+    // 생각해보셈 일단 왼쪽에 있는 것들은 현재 node보다 전부 작잖아
+    // 오른쪽에 있는 것들은 다 크고
+    // 그러면 오른쪽에 있는 것 중 가장 작은 값이 현재 노드가 되어야 tree가 망가지지 않잖아
+    // 왜냐하면 큰 그룹 중 가장 작은 값이니까 left 그룹에 있는 값들보다는 무조건 크고
+    // right 그룹에 있는 것들 보다는 무조건 작으니까 !
+    const searchKey = this.search(key);
+    if (!searchKey) throw new Error("맞는게 업짜나!!!!!!!!!!!!");
+
+    function removeNode(node) {
+      console.log("1");
+      if (node.left && !node.right) {
+        node = node.left;
+        return node;
+      }
+
+      if (!node.left && node.right) {
+        node = node.right;
+        return node;
+      }
+
+      if (node.left && node.right) {
+        const newNode = node.right;
+        function replaceNode(node, newNode) {
+          if (newNode.left) {
+            replaceNode(newNode.left);
+            return;
+          }
+          return (node = newNode);
+        }
+        replaceNode(node, newNode);
+      }
+    }
+
+    removeNode(searchKey);
   }
 }
 
-const binarySearchTree = new BinarySearchTree();
-binarySearchTree.insert(4);
-binarySearchTree.insert(5);
-binarySearchTree.insert(3);
-binarySearchTree.insert(1);
-binarySearchTree.insert(2);
-binarySearchTree.insert(10);
-binarySearchTree.insert(100);
-binarySearchTree.insert(99);
+// dkdkkdkdk왜안대ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ
 
-binarySearchTree.search(10);
-console.log(binarySearchTree.min());
-console.log(binarySearchTree.max());
+const binarySearchTree = new BinarySearchTree();
+binarySearchTree.insert(5);
+binarySearchTree.insert(2);
+binarySearchTree.insert(9);
+binarySearchTree.insert(10);
+binarySearchTree.remove(9);
+console.log(binarySearchTree.root);
+
+// console.log(binarySearchTree.root);
