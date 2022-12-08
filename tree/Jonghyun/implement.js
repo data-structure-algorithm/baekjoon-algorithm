@@ -7,11 +7,37 @@
 // 재귀함수를 쓰면 될까?
 
 class Node {
-  node = { left: null, right: null, key: null };
+  constructor(key) {
+    this.key = key;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
 
   // 새로운 키를 삽입
   insert(key) {
     //
+    const newNode = new Node(key);
+
+    if (this.root === null) {
+      this.root = newNode;
+      return;
+    }
+
+    function insertNode(node, newNode) {
+      if (newNode.key < node.key) {
+        node.left === null ? (node.left = newNode) : insertNode(node.left, newNode);
+      } else {
+        node.right === null ? (node.right = newNode) : insertNode(node.right, newNode);
+      }
+    }
+
+    insertNode(this.root, newNode);
   }
 
   // 해당 키가 있는지 없는지 반환 => boolean
@@ -34,3 +60,16 @@ class Node {
     //
   }
 }
+
+const binarySearchTree = new BinarySearchTree();
+console.log(binarySearchTree.root);
+binarySearchTree.insert(4);
+console.log(binarySearchTree.root);
+binarySearchTree.insert(5);
+console.log(binarySearchTree.root);
+binarySearchTree.insert(3);
+console.log(binarySearchTree.root);
+binarySearchTree.insert(1);
+console.log(binarySearchTree.root);
+binarySearchTree.insert(2);
+console.log(binarySearchTree.root);
