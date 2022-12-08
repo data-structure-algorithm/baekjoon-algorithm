@@ -21,7 +21,6 @@ class BinarySearchTree {
 
   // 새로운 키를 삽입
   insert(key) {
-    //
     const newNode = new Node(key);
 
     if (this.root === null) {
@@ -42,7 +41,6 @@ class BinarySearchTree {
 
   // 해당 키가 있는지 없는지 반환 => boolean
   search(key) {
-    //
     function searchNode(node, key) {
       if (node === null) return false;
 
@@ -61,11 +59,41 @@ class BinarySearchTree {
   // tree의 최솟값
   min() {
     //
+    let result;
+
+    function searchMinValue(node) {
+      if (node === null) throw new Error("root가 없짜나!!!!!!!!!!");
+
+      if (node.left === null) {
+        result = node.key;
+        return;
+      }
+
+      if (node.left !== null) searchMinValue(node.left);
+    }
+
+    searchMinValue(this.root);
+    return result;
   }
 
   // tree의 최댓값
   max() {
     //
+    let result;
+
+    function searchMinValue(node) {
+      if (node === null) throw new Error("root가 없짜나!!!!!!!!!!");
+
+      if (node.right === null) {
+        result = node.key;
+        return;
+      }
+
+      if (node.right !== null) searchMinValue(node.right);
+    }
+
+    searchMinValue(this.root);
+    return result;
   }
 
   // 해당 키를 삭제
@@ -81,5 +109,9 @@ binarySearchTree.insert(3);
 binarySearchTree.insert(1);
 binarySearchTree.insert(2);
 binarySearchTree.insert(10);
+binarySearchTree.insert(100);
+binarySearchTree.insert(99);
 
 binarySearchTree.search(10);
+console.log(binarySearchTree.min());
+console.log(binarySearchTree.max());
