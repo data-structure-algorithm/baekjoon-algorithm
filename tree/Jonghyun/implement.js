@@ -6,4 +6,31 @@
 // 4. 그리고 다시 1번을 실행할 거야
 // 재귀함수를 쓰면 될까?
 
-class Node {}
+class Node {
+  node = { left: null, right: null, key: null };
+
+  // 새로운 키를 삽입
+  insert(key) {
+    //
+  }
+
+  // 해당 키가 있는지 없는지 반환 => boolean
+  search(key) {
+    //
+  }
+
+  // tree의 최솟값
+  min() {
+    //
+  }
+
+  // tree의 최댓값
+  max() {
+    //
+  }
+
+  // 해당 키를 삭제
+  remove() {
+    //
+  }
+}
