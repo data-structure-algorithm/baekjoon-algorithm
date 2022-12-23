@@ -1,89 +1,22 @@
-const array = [14, "push 1", "push 2", "top", "size", "empty", "pop", "pop", "pop", "size", "empty", "pop", "push 3", "empty", "top"];
-// const array = [7, "pop", "top", "push 123", "top", "pop", "top", "pop"];
-// const array = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+// 프로그래머스-올바른 괄호 찾기
 
-let node = { value: undefined, next: undefined };
-let head;
-let size = 0;
-let result = [];
+function solution(s) {
+  //1. 첫번째가 ')' 마지막이 '(' 이 나오면 안 됨
+  //2. '(' => push ')' => pop
 
-const stack = {
-  push: (number) => {
-    node = { value: number, next: head };
-    head = node;
-    size++;
-  },
-  pop: () => {
-    if (size === 0) {
-      return -1;
+  let answer = true;
+  let size = 0;
+
+  if (s[s.length - 1] === "(") {
+    return (answer = false);
+  }
+
+  for (let i = 0; i < s.length; i++) {
+    if (size === 0 && s[i] === ")") {
+      return (answer = false);
     }
-    node = head;
-    head = node.next;
-    size--;
-    return node.value;
-  },
-  empty: () => {
-    return size === 0 ? 1 : 0;
-  },
-  size: () => {
-    return size;
-  },
-  top: () => {
-    if (size === 0) {
-      return -1;
-    }
-    return node.value;
-  },
-};
+    s[i] === "(" ? size++ : size--;
+  }
 
-for (let i = 1; i < array.length; i++) {
-  const func = array[i].split(" ");
-  result.push(stack[func[0]](func[1]));
+  return (answer = size !== 0 ? false : true);
 }
-
-console.log(result.filter((number) => number !== undefined).join("\n"));
-// console.log(result.filter((number) => !isNaN(number)).join("\n"));
-
-// const line = require("fs").readFileSync("/dev/stdin", "utf8");
-// let array = line.trim().split("\n");
-
-// let node = { value: undefined, next: undefined };
-// let head;
-// let size = 0;
-// let result = [];
-
-// const stack = {
-//   push: (number) => {
-//     node = { value: number, next: head };
-//     head = node;
-//     size++;
-//   },
-//   pop: () => {
-//     if (size === 0) {
-//       return -1;
-//     }
-//     node = head;
-//     head = node.next;
-//     size--;
-//     return node.value;
-//   },
-//   empty: () => {
-//     return size === 0 ? 1 : 0;
-//   },
-//   size: () => {
-//     return size;
-//   },
-//   top: () => {
-//     if (size === 0) {
-//       return -1;
-//     }
-//     return node.value;
-//   },
-// };
-
-// for (let i = 1; i < array.length; i++) {
-//   const func = array[i].split(" ");
-//   result.push(Number(stack[func[0]](func[1] !== undefined && func[1])));
-// }
-
-// console.log(result.filter((number) => !isNaN(number)).join("\n"));
